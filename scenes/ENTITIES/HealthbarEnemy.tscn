@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://textures/gui/healthbar_mob_bottom.png" type="Texture" id=1]
+[ext_resource path="res://textures/gui/healthbar_mob_middle.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ENTITIES/HealthbarEnemy.gd" type="Script" id=3]
+
+[node name="Healthbar" type="TextureProgress"]
+visible = false
+margin_left = -13.0
+margin_right = 13.0
+margin_bottom = 2.0
+value = 100.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

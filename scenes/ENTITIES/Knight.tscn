@@ -1,0 +1,131 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/OBJECTS/WeaponSword.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ENTITIES/Knight.gd" type="Script" id=2]
+[ext_resource path="res://textures/Player/knight/knight.png" type="Texture" id=3]
+[ext_resource path="res://textures/Lighting/Light256.png" type="Texture" id=4]
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.05562, 8.27681 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "hurt"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.6
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "run"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 7, 2 )
+
+[node name="Player" type="KinematicBody2D"]
+z_index = 3
+collision_layer = 0
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -4 )
+texture = ExtResource( 3 )
+hframes = 9
+
+[node name="hitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, -4 )
+collision_layer = 2048
+collision_mask = 0
+
+[node name="hitbox" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 1.06066, 5.14997 )
+shape = SubResource( 1 )
+
+[node name="animation" type="AnimationPlayer" parent="."]
+anims/hurt = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/run = SubResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="top_wall" type="RayCast2D" parent="."]
+visible = false
+position = Vector2( -5, 5 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 18 )
+
+[node name="top_wall2" type="RayCast2D" parent="."]
+visible = false
+position = Vector2( 6, 5 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 18 )
+
+[node name="bottom_wall" type="RayCast2D" parent="."]
+visible = false
+position = Vector2( -5, 5 )
+enabled = true
+cast_to = Vector2( 0, 6 )
+
+[node name="bottom_wall2" type="RayCast2D" parent="."]
+visible = false
+position = Vector2( 4, 5 )
+enabled = true
+cast_to = Vector2( 0, 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 7 )
+shape = SubResource( 5 )
+
+[node name="invincibility_frame" type="Timer" parent="."]
+one_shot = true
+
+[node name="weapon" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5, 4 )
+
+[node name="Light2D" type="Light2D" parent="."]
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 4 )
+color = Color( 1, 0.952941, 0.870588, 1 )
+mode = 2

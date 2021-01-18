@@ -1,0 +1,154 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/OBJECTS/WeaponSword.gd" type="Script" id=1]
+
+[sub_resource type="SegmentShape2D" id=1]
+b = Vector2( 0, -5 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "attack_left"
+length = 0.14
+step = 0.005
+tracks/0/type = "value"
+tracks/0/path = NodePath("weapon_hitbox/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.14 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("weapon_hitbox:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.12, 0.135 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 150.0, 135.0, 120.0, 105.0, 90.0, 75.0, 60.0, 45.0, 30.0, 15.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("weapon_hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.14 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "attack_right"
+length = 0.14
+step = 0.005
+tracks/0/type = "value"
+tracks/0/path = NodePath("weapon_hitbox/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.14 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("weapon_hitbox:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.015, 0.03, 0.045, 0.06, 0.075, 0.09, 0.105, 0.12, 0.135 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 15.0, 30.0, 45.0, 60.0, 75.0, 90.0, 105.0, 120.0, 135.0, 150.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("weapon_hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.14 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "attacking"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("weapon_hitbox/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("weapon_hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="weapon" type="KinematicBody2D"]
+position = Vector2( 4.78722, 7.33169 )
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="weapon_hitbox" type="Area2D" parent="."]
+rotation = 0.261799
+collision_layer = 0
+collision_mask = 64
+
+[node name="Sprite" type="Sprite" parent="weapon_hitbox"]
+visible = false
+position = Vector2( 0.224079, -0.12167 )
+rotation = 0.261799
+centered = false
+offset = Vector2( -5, -26 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon_hitbox"]
+position = Vector2( -0.2007, 0.0224228 )
+rotation = 0.261799
+shape = SubResource( 1 )
+disabled = true
+
+[node name="animation" type="AnimationPlayer" parent="."]
+anims/attack_left = SubResource( 2 )
+anims/attack_right = SubResource( 3 )
+anims/attacking = SubResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="attack_speed" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="area_entered" from="weapon_hitbox" to="." method="_on_weapon_hitbox_area_entered"]

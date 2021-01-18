@@ -1,0 +1,42 @@
+{
+  "1": {
+    "cumulative_xp": 0,
+    "xp_to_next": 100
+  },
+  "2": {
+    "cumulative_xp": 100,
+    "xp_to_next": 130
+  },
+  "3": {
+    "cumulative_xp": 230,
+    "xp_to_next": 170
+  },
+  "4": {
+    "cumulative_xp": 400,
+    "xp_to_next": 220
+  },
+  "5": {
+    "cumulative_xp": 620,
+    "xp_to_next": 290
+  },
+  "6": {
+    "cumulative_xp": 910,
+    "xp_to_next": 390
+  },
+  "7": {
+    "cumulative_xp": 1300,
+    "xp_to_next": 530
+  },
+  "8": {
+    "cumulative_xp": 1830,
+    "xp_to_next": 730
+  },
+  "9": {
+    "cumulative_xp": 2560,
+    "xp_to_next": 1020
+  },
+  "10": {
+    "cumulative_xp": 3580,
+    "xp_to_next": 1440
+  }
+}

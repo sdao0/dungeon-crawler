@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://m3x6.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://textures/gui/inventory/slot_hover_centre.png" type="Texture" id=2]
+[ext_resource path="res://textures/gui/inventory/slot.png" type="Texture" id=3]
+[ext_resource path="res://textures/gui/inventory/slot_background.png" type="Texture" id=4]
+[ext_resource path="res://scenes/INVENTORY/ShopSlot.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="ShopSlot" type="HBoxContainer"]
+margin_right = 26.0
+margin_bottom = 26.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 26.0
+margin_bottom = 26.0
+texture = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -11.0
+margin_top = -11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture_hover = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemCount" type="Label" parent="TextureRect/TextureRect"]
+margin_top = 8.0
+margin_right = 21.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 1 )
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 30.0
+margin_top = 6.0
+margin_right = 30.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 2 )
+[connection signal="mouse_entered" from="TextureRect/TextureRect/TextureButton" to="." method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/TextureButton" to="." method="_on_TextureButton_mouse_exited"]

@@ -1,0 +1,493 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://textures/gui/inventory/panel_back.png" type="Texture" id=1]
+[ext_resource path="res://textures/gui/inventory/exit.png" type="Texture" id=2]
+[ext_resource path="res://textures/gui/inventory/slot.png" type="Texture" id=3]
+[ext_resource path="res://textures/InventorySprites/slot_Head.png" type="Texture" id=4]
+[ext_resource path="res://textures/gui/inventory/exit_hover.png" type="Texture" id=5]
+[ext_resource path="res://textures/gui/inventory/slot_hover_centre.png" type="Texture" id=6]
+[ext_resource path="res://textures/gui/inventory/panel_outline.png" type="Texture" id=7]
+[ext_resource path="res://textures/InventorySprites/slot_Chest.png" type="Texture" id=8]
+[ext_resource path="res://textures/InventorySprites/slot_Feet.png" type="Texture" id=9]
+[ext_resource path="res://textures/InventorySprites/slot_Legs.png" type="Texture" id=10]
+[ext_resource path="res://textures/InventorySprites/slot_Ring2.png" type="Texture" id=11]
+[ext_resource path="res://textures/InventorySprites/slot_Ring.png" type="Texture" id=12]
+[ext_resource path="res://textures/InventorySprites/slot_Weapon.png" type="Texture" id=13]
+[ext_resource path="res://m5x7.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://scenes/INVENTORY/Inventory.gd" type="Script" id=15]
+[ext_resource path="res://textures/ItemSprites/Gold.png" type="Texture" id=16]
+[ext_resource path="res://m3x6.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://scenes/INVENTORY/Inspector.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/INVENTORY/Head.gd" type="Script" id=20]
+[ext_resource path="res://scenes/INVENTORY/Chest.gd" type="Script" id=21]
+[ext_resource path="res://scenes/INVENTORY/Legs.gd" type="Script" id=22]
+[ext_resource path="res://scenes/INVENTORY/Feet.gd" type="Script" id=23]
+[ext_resource path="res://scenes/OBJECTS/Weapon.gd" type="Script" id=24]
+[ext_resource path="res://scenes/INVENTORY/Necklace.gd" type="Script" id=25]
+[ext_resource path="res://scenes/INVENTORY/Ring.gd" type="Script" id=26]
+[ext_resource path="res://scenes/INVENTORY/Ring2.gd" type="Script" id=27]
+[ext_resource path="res://scenes/INVENTORY/Stats.gd" type="Script" id=28]
+[ext_resource path="res://textures/InventorySprites/slot_Necklace.png" type="Texture" id=29]
+[ext_resource path="res://textures/scrollbar.tres" type="Theme" id=30]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://m5x7.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 17 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 14 )
+
+[node name="Inventory" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -240.0
+margin_top = -135.0
+margin_right = 240.0
+margin_bottom = 135.0
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -122.0
+margin_top = -72.0
+margin_right = 122.0
+margin_bottom = 72.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -116.0
+margin_top = -66.0
+margin_right = 116.0
+margin_bottom = 66.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inspector" parent="TextureRect/TextureRect" instance=ExtResource( 18 )]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -3.0
+custom_constants/separation = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="HBoxContainer" parent="TextureRect/TextureRect/VBoxContainer"]
+margin_right = 232.0
+margin_bottom = 13.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="TextureRect/TextureRect/VBoxContainer/Header"]
+margin_right = 73.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+text = " Equipment"
+
+[node name="Label3" type="Label" parent="TextureRect/TextureRect/VBoxContainer/Header"]
+margin_left = 73.0
+margin_right = 146.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+text = "Stats"
+
+[node name="Label2" type="Label" parent="TextureRect/TextureRect/VBoxContainer/Header"]
+margin_left = 146.0
+margin_right = 219.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+text = "Inventory"
+
+[node name="exit" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/Header"]
+margin_left = 219.0
+margin_top = 1.0
+margin_right = 230.0
+margin_bottom = 12.0
+size_flags_vertical = 4
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainElements" type="HBoxContainer" parent="TextureRect/TextureRect/VBoxContainer"]
+margin_top = 16.0
+margin_right = 232.0
+margin_bottom = 129.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="TextureRect/TextureRect/VBoxContainer/MainElements"]
+margin_top = 49.0
+margin_bottom = 63.0
+
+[node name="Left" type="HBoxContainer" parent="TextureRect/TextureRect/VBoxContainer/MainElements"]
+margin_left = 4.0
+margin_right = 116.0
+margin_bottom = 113.0
+size_flags_horizontal = 3
+
+[node name="Equipped" type="HBoxContainer" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left"]
+margin_right = 56.0
+margin_bottom = 113.0
+
+[node name="Body" type="VBoxContainer" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped"]
+margin_right = 26.0
+margin_bottom = 113.0
+custom_constants/separation = 3
+
+[node name="Head" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body" groups=[
+"Equipment",
+]]
+margin_right = 26.0
+margin_bottom = 26.0
+texture = ExtResource( 3 )
+script = ExtResource( 20 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Head"]
+show_behind_parent = true
+margin_left = 2.35355
+margin_top = 2.0
+margin_right = 24.3535
+margin_bottom = 24.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Head/TextureRect"]
+margin_right = 22.0
+margin_bottom = 22.0
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chest" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body" groups=[
+"Equipment",
+]]
+margin_top = 29.0
+margin_right = 26.0
+margin_bottom = 55.0
+texture = ExtResource( 3 )
+script = ExtResource( 21 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Chest"]
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Chest/TextureRect"]
+margin_left = 0.25
+margin_right = 22.25
+margin_bottom = 22.0
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Legs" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body" groups=[
+"Equipment",
+]]
+margin_top = 58.0
+margin_right = 26.0
+margin_bottom = 84.0
+texture = ExtResource( 3 )
+script = ExtResource( 22 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Legs"]
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 26.0
+margin_bottom = 26.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Legs/TextureRect"]
+margin_top = 0.187286
+margin_right = 22.0
+margin_bottom = 22.1873
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Feet" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body" groups=[
+"Equipment",
+]]
+margin_top = 87.0
+margin_right = 26.0
+margin_bottom = 113.0
+texture = ExtResource( 3 )
+script = ExtResource( 23 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Feet"]
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Feet/TextureRect"]
+margin_right = 22.0
+margin_bottom = 22.0
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accessories" type="VBoxContainer" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped"]
+margin_left = 30.0
+margin_right = 56.0
+margin_bottom = 113.0
+custom_constants/separation = 3
+
+[node name="Weapon" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories" groups=[
+"Equipment",
+]]
+margin_right = 26.0
+margin_bottom = 26.0
+texture = ExtResource( 3 )
+script = ExtResource( 24 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Weapon"]
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Weapon/TextureRect"]
+margin_right = 22.0
+margin_bottom = 22.0
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Necklace" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories" groups=[
+"Equipment",
+]]
+margin_top = 29.0
+margin_right = 26.0
+margin_bottom = 55.0
+texture = ExtResource( 3 )
+script = ExtResource( 25 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Necklace"]
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Necklace/TextureRect"]
+margin_left = 0.25
+margin_right = 22.25
+margin_bottom = 22.0
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ring" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories" groups=[
+"Equipment",
+]]
+margin_top = 58.0
+margin_right = 26.0
+margin_bottom = 84.0
+texture = ExtResource( 3 )
+script = ExtResource( 26 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring"]
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 26.0
+margin_bottom = 26.0
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring/TextureRect"]
+margin_top = 0.187286
+margin_right = 22.0
+margin_bottom = 22.1873
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ring2" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories" groups=[
+"Equipment",
+]]
+margin_top = 87.0
+margin_right = 26.0
+margin_bottom = 113.0
+texture = ExtResource( 3 )
+script = ExtResource( 27 )
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring2"]
+show_behind_parent = true
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring2/TextureRect"]
+margin_right = 22.0
+margin_bottom = 22.0
+texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="VBoxContainer" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left"]
+margin_left = 60.0
+margin_right = 74.0
+margin_bottom = 113.0
+script = ExtResource( 28 )
+
+[node name="HP" type="Label" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Stats"]
+margin_right = 14.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 3 )
+text = "HP:"
+
+[node name="DEF" type="Label" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Stats"]
+margin_top = 17.0
+margin_right = 14.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 3 )
+text = "DEF:"
+
+[node name="ATK" type="Label" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Stats"]
+margin_top = 34.0
+margin_right = 14.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 3 )
+text = "ATK:"
+
+[node name="break" type="Label" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Stats"]
+margin_top = 51.0
+margin_right = 14.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 3 )
+
+[node name="LVL" type="Label" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Stats"]
+margin_top = 68.0
+margin_right = 14.0
+margin_bottom = 81.0
+custom_fonts/font = SubResource( 3 )
+text = "LVL:"
+
+[node name="XP" type="Label" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Stats"]
+margin_top = 85.0
+margin_right = 14.0
+margin_bottom = 98.0
+custom_fonts/font = SubResource( 3 )
+text = "XP:"
+
+[node name="Gold" type="TextureRect" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Stats"]
+margin_top = 102.0
+margin_right = 14.0
+margin_bottom = 110.0
+texture = ExtResource( 16 )
+
+[node name="Amount" type="Label" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Stats/Gold"]
+anchor_left = 0.0140312
+anchor_right = 0.0140312
+margin_left = 9.71938
+margin_top = -3.0
+margin_right = 21.7194
+margin_bottom = 10.0
+custom_fonts/font = SubResource( 4 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="HBoxContainer" parent="TextureRect/TextureRect/VBoxContainer/MainElements"]
+margin_left = 120.0
+margin_right = 232.0
+margin_bottom = 113.0
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Right"]
+margin_right = 112.0
+margin_bottom = 113.0
+size_flags_horizontal = 3
+theme = ExtResource( 30 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/TextureRect/VBoxContainer/MainElements/Right/ScrollContainer"]
+margin_right = 112.0
+margin_bottom = 113.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+[connection signal="pressed" from="TextureRect/TextureRect/VBoxContainer/Header/exit" to="." method="_on_exit_pressed"]
+[connection signal="mouse_entered" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Head/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Head" method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Head/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Head" method="_on_TextureButton_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Chest/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Chest" method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Chest/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Chest" method="_on_TextureButton_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Legs/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Legs" method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Legs/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Legs" method="_on_TextureButton_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Feet/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Feet" method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Feet/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Body/Feet" method="_on_TextureButton_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Weapon/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Weapon" method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Weapon/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Weapon" method="_on_TextureButton_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Necklace/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Necklace" method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Necklace/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Necklace" method="_on_TextureButton_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring" method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring" method="_on_TextureButton_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring2/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring2" method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring2/TextureRect/TextureButton" to="TextureRect/TextureRect/VBoxContainer/MainElements/Left/Equipped/Accessories/Ring2" method="_on_TextureButton_mouse_exited"]

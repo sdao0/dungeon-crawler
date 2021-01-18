@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/GUI/DamageNumber.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/GUI/GameNumbers.gd" type="Script" id=2]
+
+[node name="GameNumbers" type="Node2D"]
+z_index = 5
+script = ExtResource( 2 )
+
+[node name="DamageNumber" parent="." instance=ExtResource( 1 )]
+visible = false
