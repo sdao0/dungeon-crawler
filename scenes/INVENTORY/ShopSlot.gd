@@ -8,6 +8,7 @@ var pressable
 var slot_name
 
 onready var inspector = get_node("../../../../../").get_node("Inspector")
+onready var shop_menu = get_node("../../../../../../../")
 
 func _ready():
 	var image = "res://textures/InventorySprites/" + item_name + ".png"
@@ -34,12 +35,14 @@ func buy():
 	var price = 2 * ImportData.item_data[id]["ItemValue"]
 	if GameData.gold >= price:
 		item_count -= 1
+		shop_menu.buy[slot_name]["item_count"] -= 1
 		update_count()
 		GameData.gold -= price
 		var s = get_node("/root/Main/GUI/Inventory").add_slot(id, item_name, 1)
-		get_node("../../../../../../../").add_slot(id, item_name, 1, "Sell", s.name) # ShopMenu node	
+		shop_menu.add_slot(id, item_name, 1, "Sell", s.name)
 		inspector.inspect(id, item_name, item_count, type)
 		if item_count == 0:
+			shop_menu.buy.erase(slot_name)
 			inspector.close()
 			queue_free()
 			
@@ -50,7 +53,7 @@ func sell():
 			i.item_count -= 1
 			item_count -= 1
 			update_count()
-			get_node("../../../../../../../").add_slot(id, item_name, 1, "Buy", slot_name)
+			shop_menu.add_slot(id, item_name, 1, "Buy", slot_name)
 			inspector.inspect(id, item_name, item_count, type)
 			if i.item_count == 0:
 				inspector.close()

@@ -20,7 +20,7 @@ func load_data():
 
 func load_timer():
 	minutes = floor(LevelData.map_data[get_parent().name][name]["time_left"]/60)
-	seconds = int(LevelData.map_data[get_parent().name][name]["time_left"])%60
+	seconds = int(LevelData.map_data[get_parent().name][name]["time_left"]) % 60
 	$Timer.start()
 	$AnimatedSprite.stop()
 	$AnimatedSprite.frame = 0

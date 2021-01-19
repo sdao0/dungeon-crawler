@@ -10,6 +10,26 @@ var collider2
 var in_range
 var pressable
 
+var initial_stock
+
+func save_data():
+	if !LevelData.map_data.has(get_parent().name):
+		LevelData.map_data[get_parent().name] = {}
+	if !LevelData.map_data[get_parent().name].has([name]):
+		LevelData.map_data[get_parent().name][name] = {}
+	LevelData.map_data[get_parent().name][name]["Stocked"] = initial_stock
+	LevelData.map_data[get_parent().name][name]["Shop"] = get_node("CanvasLayer/ShopMenu").buy
+
+func load_data():
+	initial_stock = LevelData.map_data[get_parent().name][name]["Stocked"]
+	if initial_stock:
+		$restock_timer.wait_time = 600
+		$restock_timer.start()
+	var shop_data = LevelData.map_data[get_parent().name][name]["Shop"]
+	for i in shop_data:
+		get_node("CanvasLayer/ShopMenu").add_slot(shop_data[i]["id"], shop_data[i]["item_name"], shop_data[i]["item_count"], "Buy", null)
+	#print("Loaded shop_data.")
+
 func _physics_process(delta):
 	if ($top_wall.is_colliding() || $top_wall2.is_colliding()) && \
 	 ($bottom_wall.is_colliding() || $bottom_wall2.is_colliding()) :
@@ -70,5 +90,8 @@ func _unhandled_input(event):
 			$CanvasLayer/ShopMenu.visible = true
 
 func _on_restock_timer_timeout():
-	$CanvasLayer/ShopMenu.restock()
+	print("restock")
 	$restock_timer.wait_time = 600
+	$restock_timer.start()
+	$CanvasLayer/ShopMenu.restock()
+	initial_stock = true

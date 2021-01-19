@@ -24,7 +24,7 @@ func remove(type):
 		i.queue_free()
 	if type == "Buy":
 		buy = {}
-		emit_signal("cleared")
+	emit_signal("cleared")
 		
 func add_slot(id, item_name, item_count, type, slot_name):
 	var stacked
@@ -55,9 +55,15 @@ func add_slot(id, item_name, item_count, type, slot_name):
 		s.type = type
 		if type == "Sell":
 			s.slot_name = slot_name
-			sell[item_name] = {"id": id, "item_name": item_name, "item_count": item_count}
+			sell[slot_name] = {"id": id, "item_name": item_name, "item_count": item_count}
 		else:
-			buy[item_name] = {"id": id, "item_name": item_name, "item_count": item_count}
+			var count = 1
+			slot_name = item_name
+			while buy.has(slot_name):
+				slot_name = slot_name + str(count)
+				count += 1
+			buy[slot_name] = {"id": id, "item_name": item_name, "item_count": item_count}
+			s.slot_name = slot_name
 		get_node("TextureRect/TextureRect/VBoxContainer/HBoxContainer/" + type + "/" + type + "/").add_child(s)
 		s.set_owner(get_parent())
 		

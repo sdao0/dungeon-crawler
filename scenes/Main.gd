@@ -15,7 +15,6 @@ func _ready():
 	else:
 		player.global_position = get_node(LevelData.current_map).default_position
 	get_node(LevelData.current_map).add_child(player)
-	get_loot(pos)
 	
 func get_loot(body_pos):
 	loot = ImportData.loot_selector(get_node(LevelData.current_map).map_name)
